@@ -5,9 +5,10 @@ import { getImagePath } from "@web-speed-hackathon-2026/client/src/utils/get_pat
 
 interface Props {
   images: Models.Image[];
+  isFv: boolean;
 }
 
-export const ImageArea = ({ images }: Props) => {
+export const ImageArea = ({ images, isFv }: Props) => {
   return (
     <div className="border-cax-border grid h-full w-full grid-cols-2 grid-rows-2 gap-1 overflow-hidden rounded-lg border aspect-video">
       {images.map((image, idx) => {
@@ -24,7 +25,11 @@ export const ImageArea = ({ images }: Props) => {
                 images.length <= 2 || (images.length === 3 && idx === 0),
             })}
           >
-            <CoveredImage src={getImagePath(image.id)} alt={image.alt} />
+            <CoveredImage
+              src={getImagePath(image.id)}
+              alt={image.alt}
+              isFv={isFv}
+            />
           </div>
         );
       })}
