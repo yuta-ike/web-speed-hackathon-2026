@@ -112,13 +112,13 @@ export const NewPostModalPage = ({
       if (isValid) {
         setIsConverting(true);
 
-        convertMovie(file, { extension: "gif", size: undefined })
+        convertMovie(file, { extension: "mp4", size: 640 })
           .then((converted) => {
             setParams((params) => ({
               ...params,
               images: [],
-              movie: new File([converted], "converted.gif", {
-                type: "image/gif",
+              movie: new File([converted], "converted.mp4", {
+                type: "video/mp4",
               }),
               sound: undefined,
             }));

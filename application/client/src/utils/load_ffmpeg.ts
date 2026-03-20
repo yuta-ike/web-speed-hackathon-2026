@@ -8,6 +8,7 @@ async function internalLoadFFmpeg() {
   await ffmpeg.load({
     coreURL: `${baseURL}/ffmpeg-core.js`,
     wasmURL: `${baseURL}/ffmpeg-core.wasm`,
+    workerURL: `${baseURL}/ffmpeg-core.worker.js`,
   });
 
   return ffmpeg;
