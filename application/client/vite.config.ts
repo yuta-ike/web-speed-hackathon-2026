@@ -2,6 +2,7 @@ import tailwindcss from "@tailwindcss/vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { join } from "node:path";
+import { analyzer } from "vite-bundle-analyzer";
 // import babel from '@rolldown/plugin-babel'
 
 // https://vite.dev/config/
@@ -20,6 +21,7 @@ export default defineConfig({
   assetsInclude: ["**/*.wasm?binary"],
   publicDir: join(import.meta.dirname, "../public"),
   plugins: [
+    analyzer(),
     react(),
     tailwindcss(),
     // babel({
