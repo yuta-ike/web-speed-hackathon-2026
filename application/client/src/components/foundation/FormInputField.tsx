@@ -10,7 +10,14 @@ interface Props extends WrappedFieldProps {
   rightItem?: ReactNode;
 }
 
-export const FormInputField = ({ label, leftItem, rightItem, input, meta, ...props }: Props) => {
+export const FormInputField = ({
+  label,
+  leftItem,
+  rightItem,
+  input,
+  meta,
+  ...props
+}: Props) => {
   const inputId = useId();
   const errorMessageId = useId();
   const isInvalid = meta.touched && meta.error;

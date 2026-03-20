@@ -57,7 +57,9 @@ test.describe("Crok AIチャット", () => {
     });
 
     // SSE完了を待つ（フッターテキストが変わる）
-    await expect(page.getByText("Crok AIは間違いを起こす可能性があります。")).toBeVisible({
+    await expect(
+      page.getByText("Crok AIは間違いを起こす可能性があります。"),
+    ).toBeVisible({
       timeout: 300_000,
     });
 

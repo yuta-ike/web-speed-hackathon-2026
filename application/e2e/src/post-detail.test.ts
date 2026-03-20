@@ -40,7 +40,9 @@ test.describe("投稿詳細 - 動画", () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
   });
 
-  test("動画が自動再生され、クリックで一時停止・再生を切り替えられる", async ({ page }) => {
+  test("動画が自動再生され、クリックで一時停止・再生を切り替えられる", async ({
+    page,
+  }) => {
     await page.goto("/");
     const movieArticle = page.locator("article:has(canvas)").first();
     await expect(movieArticle).toBeVisible({ timeout: 30_000 });
@@ -72,7 +74,9 @@ test.describe("投稿詳細 - 音声", () => {
 
   test("音声の波形が表示され、再生ボタンで切り替えられる", async ({ page }) => {
     await page.goto("/");
-    const soundArticle = page.locator('article:has(svg[viewBox="0 0 100 1"])').first();
+    const soundArticle = page
+      .locator('article:has(svg[viewBox="0 0 100 1"])')
+      .first();
     await expect(soundArticle).toBeVisible({ timeout: 30_000 });
     await soundArticle.locator("time").first().click();
     await page.waitForURL("**/posts/*", { timeout: 10_000 });
@@ -87,7 +91,9 @@ test.describe("投稿詳細 - 音声", () => {
     });
 
     // 再生ボタンをクリック
-    const playButton = page.locator("button.rounded-full.bg-cax-accent").first();
+    const playButton = page
+      .locator("button.rounded-full.bg-cax-accent")
+      .first();
     await playButton.click();
 
     // 少し待ってから一時停止
@@ -116,7 +122,9 @@ test.describe("投稿詳細 - 写真", () => {
     });
     expect(position).toBe("absolute");
 
-    const naturalWidth = await coveredImage.evaluate((el: HTMLImageElement) => el.naturalWidth);
+    const naturalWidth = await coveredImage.evaluate(
+      (el: HTMLImageElement) => el.naturalWidth,
+    );
     expect(naturalWidth).toBeGreaterThan(100);
 
     // VRT: 写真投稿詳細

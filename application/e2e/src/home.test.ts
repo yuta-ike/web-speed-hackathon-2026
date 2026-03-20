@@ -16,10 +16,13 @@ test.describe("ホーム", () => {
 
     // VRT: タイムライン（サインイン前）
     await waitForVisibleMedia(page);
-    await expect(page).toHaveScreenshot("home-タイムライン（サインイン前）.png", {
-      fullPage: false,
-      mask: dynamicMediaMask(page),
-    });
+    await expect(page).toHaveScreenshot(
+      "home-タイムライン（サインイン前）.png",
+      {
+        fullPage: false,
+        mask: dynamicMediaMask(page),
+      },
+    );
   });
 
   test("タイトルが「タイムライン - CaX」", async ({ page }) => {
