@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { Field, formValueSelector, InjectedFormProps, reduxForm } from "redux-form";
+import { Field, formValueSelector, type InjectedFormProps, reduxForm } from "redux-form";
 
-import { AuthFormData } from "@web-speed-hackathon-2026/client/src/auth/types";
+import type { AuthFormData } from "@web-speed-hackathon-2026/client/src/auth/types";
 import { validate } from "@web-speed-hackathon-2026/client/src/auth/validation";
 import { FormInputField } from "@web-speed-hackathon-2026/client/src/components/foundation/FormInputField";
 import { Link } from "@web-speed-hackathon-2026/client/src/components/foundation/Link";

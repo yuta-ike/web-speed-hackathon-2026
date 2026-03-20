@@ -32,7 +32,9 @@ export async function convertImage(file: File, options: Options): Promise<Blob> 
         const descriptionBinary = Array.from(new TextEncoder().encode(comment))
           .map((b) => String.fromCharCode(b))
           .join("");
-        const exifStr = dump({ "0th": { [ImageIFD.ImageDescription]: descriptionBinary } });
+        const exifStr = dump({
+          "0th": { [ImageIFD.ImageDescription]: descriptionBinary },
+        });
         const outputWithExif = insert(exifStr, binary);
         const bytes = Uint8Array.from(outputWithExif.split("").map((c) => c.charCodeAt(0)));
         resolve(new Blob([bytes]));

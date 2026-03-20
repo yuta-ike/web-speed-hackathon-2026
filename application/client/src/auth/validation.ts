@@ -1,6 +1,6 @@
-import { FormErrors } from "redux-form";
+import type { FormErrors } from "redux-form";
 
-import { AuthFormData } from "@web-speed-hackathon-2026/client/src/auth/types";
+import type { AuthFormData } from "@web-speed-hackathon-2026/client/src/auth/types";
 
 export const validate = (values: AuthFormData): FormErrors<AuthFormData> => {
   const errors: FormErrors<AuthFormData> = {};

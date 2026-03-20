@@ -1,5 +1,5 @@
 import { MagickFormat } from "@imagemagick/magick-wasm";
-import { ChangeEventHandler, FormEventHandler, useCallback, useState } from "react";
+import { type ChangeEventHandler, type FormEventHandler, useCallback, useState } from "react";
 
 import { FontAwesomeIcon } from "@web-speed-hackathon-2026/client/src/components/foundation/FontAwesomeIcon";
 import { ModalErrorMessage } from "@web-speed-hackathon-2026/client/src/components/modal/ModalErrorMessage";
@@ -87,7 +87,9 @@ export const NewPostModalPage = ({ id, hasError, isLoading, onResetError, onSubm
           ...params,
           images: [],
           movie: undefined,
-          sound: new File([converted], "converted.mp3", { type: "audio/mpeg" }),
+          sound: new File([converted], "converted.mp3", {
+            type: "audio/mpeg",
+          }),
         }));
 
         setIsConverting(false);

@@ -1,20 +1,57 @@
 import fs from "node:fs";
-import path from "node:path";
+import path, { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { Router } from "express";
 import httpErrors from "http-errors";
+import kuromoji, { type Tokenizer, type IpadicFeatures } from "kuromoji";
 
 import { QaSuggestion } from "@web-speed-hackathon-2026/server/src/models";
+import {
+  extractTokens,
+  filterSuggestionsBM25,
+} from "../../utils/extract_tokens";
 
 export const crokRouter = Router();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const response = fs.readFileSync(path.join(__dirname, "crok-response.md"), "utf-8");
+const response = fs.readFileSync(
+  path.join(__dirname, "crok-response.md"),
+  "utf-8",
+);
 
-crokRouter.get("/crok/suggestions", async (_req, res) => {
-  const suggestions = await QaSuggestion.findAll({ logging: false });
-  res.json({ suggestions: suggestions.map((s) => s.question) });
+const builder = kuromoji.builder({
+  dicPath: join(__dirname, "/dicts"),
+});
+const tokenizer = await new Promise<Tokenizer<IpadicFeatures>>(
+  (resolve, reject) => {
+    builder.build((err, tokenizer) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(tokenizer);
+      }
+    });
+  },
+);
+
+crokRouter.get("/crok/suggestions", async (req, res) => {
+  const query = req.query["q"];
+  if (typeof query !== "string") {
+    res.json({ suggestions: [] });
+    return;
+  }
+
+  const candidates = await QaSuggestion.findAll({ logging: false });
+
+  const tokens = extractTokens(tokenizer.tokenize(query));
+  const suggestions = filterSuggestionsBM25(
+    tokenizer,
+    candidates.map((s) => s.question),
+    tokens,
+  );
+
+  res.json({ suggestions, tokens });
 });
 
 function sleep(ms: number): Promise<void> {
