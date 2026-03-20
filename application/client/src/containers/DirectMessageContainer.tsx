@@ -10,6 +10,7 @@ import {
   fetchJSON,
   sendJSON,
 } from "@web-speed-hackathon-2026/client/src/utils/fetchers";
+import { useThrottleCallback } from "../utils/use_throttle_callback";
 
 interface DmUpdateEvent {
   type: "dm:conversation:message";
@@ -86,6 +87,7 @@ export const DirectMessageContainer = ({ activeUser, authModalId }: Props) => {
   const handleTyping = useCallback(async () => {
     void sendJSON(`/api/v1/dm/${conversationId}/typing`, {});
   }, [conversationId]);
+  const throttledHandleTyping = useThrottleCallback(handleTyping, 500);
 
   useWs(
     `/api/v1/dm/${conversationId}`,
@@ -141,7 +143,7 @@ export const DirectMessageContainer = ({ activeUser, authModalId }: Props) => {
         conversationError={conversationError}
         conversation={conversation}
         activeUser={activeUser}
-        onTyping={handleTyping}
+        onTyping={throttledHandleTyping}
         isPeerTyping={isPeerTyping}
         isSubmitting={isSubmitting}
         onSubmit={handleSubmit}
