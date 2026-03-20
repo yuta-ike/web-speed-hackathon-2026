@@ -1,5 +1,4 @@
-import Encoding from "encoding-japanese";
-
+import { convert } from "encoding-japanese";
 import { loadFFmpeg } from "@web-speed-hackathon-2026/client/src/utils/load_ffmpeg";
 
 interface SoundMetadata {
@@ -29,7 +28,7 @@ export async function extractMetadataFromSound(
 
     ffmpeg.terminate();
 
-    const outputUtf8 = Encoding.convert(output, {
+    const outputUtf8 = convert(output, {
       to: "UNICODE",
       from: "AUTO",
       type: "string",

@@ -34,11 +34,9 @@ export const PausableMovie = ({ src, isFv }: Props) => {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        console.log("IntersectionObserver", entry?.isIntersecting);
         if (entry?.isIntersecting) {
           // NOTE: 初めて画面に入った時に読み込む
           if (videoElm.src == null || videoElm.src === "") {
-            console.log("Load video", src);
             videoElm.src = src;
           }
         }

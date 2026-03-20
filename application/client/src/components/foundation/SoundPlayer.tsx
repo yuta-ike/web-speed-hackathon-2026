@@ -13,11 +13,14 @@ interface Props {
 export const SoundPlayer = ({ sound }: Props) => {
   const { data } = useFetch(getSoundPath(sound.id), fetchBinary);
 
-  const [currentTimeRatio, setCurrentTimeRatio] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
   const handleTimeUpdate = useCallback<ReactEventHandler<HTMLAudioElement>>(
     (ev) => {
       const el = ev.currentTarget;
-      setCurrentTimeRatio(el.currentTime / el.duration);
+      barRef.current?.style.setProperty(
+        "left",
+        `${(el.currentTime / el.duration) * 100}%`,
+      );
     },
     [],
   );
@@ -68,8 +71,8 @@ export const SoundPlayer = ({ sound }: Props) => {
               {data != null && <SoundWaveSVG soundData={data} />}
             </div>
             <div
+              ref={barRef}
               className="bg-cax-surface-subtle absolute inset-0 h-full w-full opacity-75"
-              style={{ left: `${currentTimeRatio * 100}%` }}
             />
           </div>
         </div>
