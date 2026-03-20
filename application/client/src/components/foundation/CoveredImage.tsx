@@ -18,16 +18,6 @@ export const CoveredImage = ({ src, alt }: Props) => {
     ev.stopPropagation();
   }, []);
 
-  // TODO: ALTのロジックを消して良いか要確認
-  // const alt = useMemo(() => {
-  //   const exif =
-  //     data != null ? load(Buffer.from(data).toString("binary")) : null;
-  //   const raw = exif?.["0th"]?.[ImageIFD.ImageDescription];
-  //   return raw != null
-  //     ? new TextDecoder().decode(Buffer.from(raw, "binary"))
-  //     : "";
-  // }, [data]);
-
   return (
     <div className="relative h-full w-full overflow-hidden">
       <img src={src} alt={alt} className="w-full h-full object-cover" />

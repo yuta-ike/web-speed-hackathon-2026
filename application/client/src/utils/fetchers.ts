@@ -4,7 +4,11 @@ import { gzip } from "pako";
 export async function fetchBinary(url: string): Promise<ArrayBuffer> {
   const result = await fetch(url, {
     method: "GET",
+    credentials: "include",
   });
+  if (!result.ok) {
+    throw new Error(`Failed to fetch: ${result.status} ${result.statusText}`);
+  }
   const buffer = await result.arrayBuffer();
   return buffer;
 }
@@ -12,24 +16,29 @@ export async function fetchBinary(url: string): Promise<ArrayBuffer> {
 export async function fetchJSON<T>(url: string): Promise<T> {
   const result = await fetch(url, {
     method: "GET",
+    credentials: "include",
   });
+  if (!result.ok) {
+    throw new Error(`Failed to fetch: ${result.status} ${result.statusText}`);
+  }
   const json = await result.json();
   return json;
 }
 
 export async function sendFile<T>(url: string, file: File): Promise<T> {
-  const result = await $.ajax({
-    async: false,
-    data: file,
-    dataType: "json",
+  const result = await fetch(url, {
+    method: "POST",
     headers: {
       "Content-Type": "application/octet-stream",
     },
-    method: "POST",
-    processData: false,
-    url,
+    body: file,
+    credentials: "include",
   });
-  return result;
+  if (!result.ok) {
+    throw new Error(`Failed to fetch: ${result.status} ${result.statusText}`);
+  }
+  const json = await result.json();
+  return json;
 }
 
 export async function sendJSON<T>(url: string, data: object): Promise<T> {
