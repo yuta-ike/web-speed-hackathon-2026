@@ -1,6 +1,3 @@
-import $ from "jquery";
-import { gzip } from "pako";
-
 export async function fetchBinary(url: string): Promise<ArrayBuffer> {
   const result = await fetch(url, {
     method: "GET",
@@ -48,21 +45,16 @@ export async function sendFile<T>(url: string, file: File): Promise<T> {
 }
 
 export async function sendJSON<T>(url: string, data: object): Promise<T> {
-  const jsonString = JSON.stringify(data);
-  const uint8Array = new TextEncoder().encode(jsonString);
-  const compressed = gzip(uint8Array);
-
-  const result = await $.ajax({
-    async: false,
-    data: compressed,
-    dataType: "json",
+  const result = await fetch(url, {
+    method: "POST",
     headers: {
-      "Content-Encoding": "gzip",
       "Content-Type": "application/json",
     },
-    method: "POST",
-    processData: false,
-    url,
+    body: JSON.stringify(data),
+    credentials: "include",
   });
-  return result;
+  if (!result.ok) {
+    throw new Error(`Failed to fetch: ${result.status} ${result.statusText}`);
+  }
+  return result.json() as Promise<T>;
 }

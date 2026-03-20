@@ -16,6 +16,9 @@ export default defineConfig(async () => {
         "/sounds": "http://localhost:3000",
       },
     },
+    build: {
+      outDir: "../dist",
+    },
     optimizeDeps: {
       exclude: ["@ffmpeg/ffmpeg"],
     },

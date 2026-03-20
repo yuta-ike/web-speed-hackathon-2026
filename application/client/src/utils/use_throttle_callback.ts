@@ -11,7 +11,6 @@ export function useThrottleCallback<T extends (...args: any[]) => void>(
     (...args: Parameters<T>) => {
       const now = Date.now();
       const timeSinceLastCall = now - lastCalledRef.current;
-      console.log(timeSinceLastCall);
 
       if (timeSinceLastCall >= delay) {
         callback(...args);
