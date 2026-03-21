@@ -1,7 +1,6 @@
 import { FastAverageColor } from "fast-average-color";
 import { type ReactEventHandler, useCallback, useState } from "react";
 
-import { FontAwesomeIcon } from "@web-speed-hackathon-2026/client/src/components/foundation/FontAwesomeIcon";
 import { getProfileImagePath } from "@web-speed-hackathon-2026/client/src/utils/get_path";
 import { formatDate } from "../../utils/format-date";
 
@@ -46,7 +45,15 @@ export const UserProfileHeader = ({ user }: Props) => {
         <p className="pt-2">{user.description}</p>
         <p className="text-cax-text-muted pt-2 text-sm">
           <span className="pr-1">
-            <FontAwesomeIcon iconType="calendar-alt" styleType="regular" />
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 448 512"
+              fill="currentColor"
+              className="inline"
+            >
+              <path d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"></path>
+            </svg>
           </span>
           <span>
             <time dateTime={new Date(user.createdAt).toISOString()}>

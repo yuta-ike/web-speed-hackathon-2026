@@ -1,7 +1,6 @@
 import { type ReactNode, useId } from "react";
 import type { WrappedFieldProps } from "redux-form";
 
-import { FontAwesomeIcon } from "@web-speed-hackathon-2026/client/src/components/foundation/FontAwesomeIcon";
 import { Input } from "@web-speed-hackathon-2026/client/src/components/foundation/Input";
 
 interface Props extends WrappedFieldProps {

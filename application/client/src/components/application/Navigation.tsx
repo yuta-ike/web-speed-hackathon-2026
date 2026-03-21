@@ -5,7 +5,6 @@ import {
 } from "@web-speed-hackathon-2026/client/src/components/application/NavigationItem";
 import { DirectMessageNotificationBadge } from "@web-speed-hackathon-2026/client/src/components/direct_message/DirectMessageNotificationBadge";
 import { CrokLogo } from "@web-speed-hackathon-2026/client/src/components/foundation/CrokLogo";
-import { FontAwesomeIcon } from "@web-speed-hackathon-2026/client/src/components/foundation/FontAwesomeIcon";
 import { AUTH_MODAL_ID, NEW_POST_MODAL_ID } from "../../utils/constants";
 import { useCallback } from "react";
 import { sendJSON } from "../../utils/fetchers";

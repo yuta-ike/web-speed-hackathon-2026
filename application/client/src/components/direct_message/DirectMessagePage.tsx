@@ -10,7 +10,6 @@ import {
   useEffect,
 } from "react";
 
-import { FontAwesomeIcon } from "@web-speed-hackathon-2026/client/src/components/foundation/FontAwesomeIcon";
 import type { DirectMessageFormData } from "@web-speed-hackathon-2026/client/src/direct_message/types";
 import { getProfileImagePath } from "@web-speed-hackathon-2026/client/src/utils/get_path";
 import { formatDate } from "../../utils/format-date";

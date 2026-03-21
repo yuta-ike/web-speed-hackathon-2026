@@ -1,8 +1,6 @@
 import classNames from "classnames";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { FontAwesomeIcon } from "@web-speed-hackathon-2026/client/src/components/foundation/FontAwesomeIcon";
-
 interface Props {
   src: string;
   isFv: boolean;

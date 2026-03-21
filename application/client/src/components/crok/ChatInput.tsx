@@ -6,7 +6,6 @@ import {
   type FormEvent,
   type KeyboardEvent,
 } from "react";
-import { FontAwesomeIcon } from "@web-speed-hackathon-2026/client/src/components/foundation/FontAwesomeIcon";
 import { useDebounceEffect } from "../../hooks/use_debounce_effect";
 import { fetchSuggestions } from "../../utils/fetch_with_cache";
 
